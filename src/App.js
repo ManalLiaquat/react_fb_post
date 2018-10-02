@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+
+// material ui
+// import { Button, Typography } from "@material-ui/core";
+// import NavigateNext from "@material-ui/icons/NavigateNext";
+// material ui
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+
+    }
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        kuch  to  hoga  hai  yaha
       </div>
     );
   }
