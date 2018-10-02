@@ -7,6 +7,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+*{  
+  font-size: 14px !important
+}
+
+* h2{
+  font-size: 1.3125rem !important;
+  font-weight: 500 !important;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+  line-height: 1.16667em !important;
+}
+
+* svg{
+  font-size: 2rem !important
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
