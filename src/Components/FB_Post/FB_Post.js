@@ -15,6 +15,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 // other libs
 import FacebookEmoji from 'react-facebook-emoji';
 import FacebookImage from "react-fb-image-grid";
+import moment from "moment";
+
 
 const styles = theme => ({
   card: {
@@ -28,17 +30,29 @@ const styles = theme => ({
 });
 
 class FBPost extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      showEmoji: false
+      showEmoji: false,
+      likeBtnFlag: false,
+      likes: props.post.likes
     }
+
+    this.handleLike = this.handleLike.bind(this);
+  }
+
+  handleLike() {
+    const { showEmoji, likes, likeBtnFlag } = this.state
+
+    this.setState({ showEmoji: !showEmoji, likeBtnFlag: !likeBtnFlag });
+    likes.includes("You") ? likes.shift("You") : likes.unshift("You")
+    this.setState({ likes })
   }
 
   render() {
     const { classes, post } = this.props;
-    const { showEmoji } = this.state
-    console.log("post****", post);
+    const { showEmoji, likes, likeBtnFlag } = this.state
+    // console.log("post****", post);
 
     return (
       <div>
@@ -57,7 +71,7 @@ class FBPost extends React.Component {
               </IconButton>
             }
             title={post.createdBy}
-            subheader={post.createdAt}
+            subheader={moment(post.createdAt).fromNow()}
           />
           <CardContent>
             <Typography component="p">
@@ -68,7 +82,7 @@ class FBPost extends React.Component {
             <FacebookImage width={100} countFrom={5} images={post.images} />
           </div>
           <hr />
-          <p style={{ fontSize: "10px", marginLeft: '2px' }}>{post.likes[0]}, {post.likes[1]} and {post.likes.length - 2} others</p>
+          <p style={{ fontSize: "10px", marginLeft: '2px' }}>{likes[0]}, {likes[1]} and {likes.length - 2} others</p>
           {
             showEmoji ? <div>
               <FacebookEmoji size="sm" type="like" />
@@ -81,8 +95,8 @@ class FBPost extends React.Component {
             </div> : null
           }
           <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton aria-label="Add to favorites">
-              <FavoriteIcon onClick={() => { this.setState({ showEmoji: !showEmoji }) }} />
+            <IconButton aria-label="Like" onClick={this.handleLike} color={likeBtnFlag ? "primary" : "default"}>
+              <FavoriteIcon />
             </IconButton>
             <IconButton aria-label="Share">
               <ShareIcon />
