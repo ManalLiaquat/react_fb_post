@@ -33,25 +33,30 @@ class FBPost extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showEmoji: false,
+      showReactions: false,
       likeBtnFlag: false,
       likes: props.post.likes
     }
-
+    this.showReactionsHandler = this.showReactionsHandler.bind(this)
     this.handleLike = this.handleLike.bind(this);
   }
 
   handleLike() {
-    const { showEmoji, likes, likeBtnFlag } = this.state
+    const { likes, likeBtnFlag } = this.state
 
-    this.setState({ showEmoji: !showEmoji, likeBtnFlag: !likeBtnFlag });
+    this.setState({ likeBtnFlag: !likeBtnFlag });
     likes.includes("You") ? likes.shift("You") : likes.unshift("You")
     this.setState({ likes })
   }
 
+  showReactionsHandler(param) {
+    // const { showReactions } = this.state
+    this.setState({ showReactions: param })
+  }
+
   render() {
     const { classes, post } = this.props;
-    const { showEmoji, likes, likeBtnFlag } = this.state
+    const { showReactions, likes, likeBtnFlag } = this.state
     // console.log("post****", post);
 
     return (
@@ -84,7 +89,7 @@ class FBPost extends React.Component {
           <hr />
           <p style={{ fontSize: "10px", marginLeft: '2px' }}>{likes[0]}, {likes[1]} and {likes.length - 2} others</p>
           {
-            showEmoji ? <div>
+            showReactions && <div style={{ position: 'absolute' }}>
               <FacebookEmoji size="sm" type="like" />
               <FacebookEmoji size="sm" type="love" />
               <FacebookEmoji size="sm" type="wow" />
@@ -92,10 +97,10 @@ class FBPost extends React.Component {
               <FacebookEmoji size="sm" type="angry" />
               <FacebookEmoji size="sm" type="haha" />
               <FacebookEmoji size="sm" type="sad" />
-            </div> : null
+            </div>
           }
           <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton aria-label="Like" onClick={this.handleLike} color={likeBtnFlag ? "primary" : "default"}>
+            <IconButton aria-label="Like" onClick={this.handleLike} onMouseEnter={() => { this.showReactionsHandler(true) }} onMouseLeave={() => { this.showReactionsHandler(false) }} onTouchStart={() => { this.showReactionsHandler(true) }} onTouchEnd={() => { this.showReactionsHandler(false) }} color={likeBtnFlag ? "primary" : "default"}>
               <FavoriteIcon />
             </IconButton>
             <IconButton aria-label="Share">
