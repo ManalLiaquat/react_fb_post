@@ -50,11 +50,11 @@ class FBPost extends React.Component {
   }
 
   handleLike() {
-    const { likes, likeBtnFlag } = this.state
+    const { likes, likeBtnFlag, showReactions } = this.state
 
     this.setState({ likeBtnFlag: !likeBtnFlag });
     likes.includes("You") ? likes.shift("You") : likes.unshift("You")
-    this.setState({ likes })
+    this.setState({ likes, showReactions: !showReactions })
   }
 
   handlerShowReactions(param) {
@@ -91,32 +91,32 @@ class FBPost extends React.Component {
               {post.description}
             </Typography>
           </CardContent>
-          <div>
-            <FacebookImage width={100} countFrom={5} images={post.images} />
+          <div id="fbImage">
+            <FacebookImage images={post.images} countFrom={5} width={100} align="left" />
           </div>
           <hr />
           <p style={{ fontSize: "10px", marginLeft: '2px' }}>{likes[0]}, {likes[1]} and {likes.length - 2} others</p>
           {
             showReactions && <div style={{ bottom: '7%', position: 'fixed', padding: '5px 10px', borderRadius: '50px', background: '#fafafa', boxShadow: '1px 1px 5px grey' }} onMouseLeave={() => { this.handlerShowReactions(false) }}>
-              <span onMouseOver={() => { this.setState({ reactLike: true }) }} onMouseOut={() => { this.setState({ reactLike: false }) }} onTouchStart={() => { this.setState({ reactLike: true }) }} onTouchMove={() => { this.setState({ reactLike: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike() }}>
+              <span onMouseOver={() => { this.setState({ reactLike: true }) }} onMouseOut={() => { this.setState({ reactLike: false }) }} onTouchStart={() => { this.setState({ reactLike: true }) }} onTouchMove={() => { this.setState({ reactLike: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike(); this.setState({ reactLike: false }) }}>
                 <FacebookEmoji size={reactLike ? 'md' : 'sm'} type="like" />
               </span>
-              <span onMouseOver={() => { this.setState({ reactLove: true }) }} onMouseOut={() => { this.setState({ reactLove: false }) }} onTouchStart={() => { this.setState({ reactLove: true }) }} onTouchMove={() => { this.setState({ reactLove: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike() }}>
+              <span onMouseOver={() => { this.setState({ reactLove: true }) }} onMouseOut={() => { this.setState({ reactLove: false }) }} onTouchStart={() => { this.setState({ reactLove: true }) }} onTouchMove={() => { this.setState({ reactLove: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike(); this.setState({ reactLove: false }) }}>
                 <FacebookEmoji size={reactLove ? 'md' : 'sm'} type="love" />
               </span>
-              <span onMouseOver={() => { this.setState({ reactHaha: true }) }} onMouseOut={() => { this.setState({ reactHaha: false }) }} onTouchStart={() => { this.setState({ reactHaha: true }) }} onTouchMove={() => { this.setState({ reactHaha: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike() }}>
+              <span onMouseOver={() => { this.setState({ reactHaha: true }) }} onMouseOut={() => { this.setState({ reactHaha: false }) }} onTouchStart={() => { this.setState({ reactHaha: true }) }} onTouchMove={() => { this.setState({ reactHaha: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike(); this.setState({ reactHaha: false }) }}>
                 <FacebookEmoji size={reactHaha ? 'md' : 'sm'} type="haha" />
               </span>
-              <span onMouseOver={() => { this.setState({ reactYay: true }) }} onMouseOut={() => { this.setState({ reactYay: false }) }} onTouchStart={() => { this.setState({ reactYay: true }) }} onTouchMove={() => { this.setState({ reactYay: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike() }}>
+              <span onMouseOver={() => { this.setState({ reactYay: true }) }} onMouseOut={() => { this.setState({ reactYay: false }) }} onTouchStart={() => { this.setState({ reactYay: true }) }} onTouchMove={() => { this.setState({ reactYay: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike(); this.setState({ reactYay: false }) }}>
                 <FacebookEmoji size={reactYay ? 'md' : 'sm'} type="yay" />
               </span>
-              <span onMouseOver={() => { this.setState({ reactWow: true }) }} onMouseOut={() => { this.setState({ reactWow: false }) }} onTouchStart={() => { this.setState({ reactWow: true }) }} onTouchMove={() => { this.setState({ reactWow: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike() }}>
+              <span onMouseOver={() => { this.setState({ reactWow: true }) }} onMouseOut={() => { this.setState({ reactWow: false }) }} onTouchStart={() => { this.setState({ reactWow: true }) }} onTouchMove={() => { this.setState({ reactWow: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike(); this.setState({ reactWow: false }) }}>
                 <FacebookEmoji size={reactWow ? 'md' : 'sm'} type="wow" />
               </span>
-              <span onMouseOver={() => { this.setState({ reactAngry: true }) }} onMouseOut={() => { this.setState({ reactAngry: false }) }} onTouchStart={() => { this.setState({ reactAngry: true }) }} onTouchMove={() => { this.setState({ reactAngry: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike() }}>
+              <span onMouseOver={() => { this.setState({ reactAngry: true }) }} onMouseOut={() => { this.setState({ reactAngry: false }) }} onTouchStart={() => { this.setState({ reactAngry: true }) }} onTouchMove={() => { this.setState({ reactAngry: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike(); this.setState({ reactAngry: false }) }}>
                 <FacebookEmoji size={reactAngry ? 'md' : 'sm'} type="angry" />
               </span>
-              <span onMouseOver={() => { this.setState({ reactSad: true }) }} onMouseOut={() => { this.setState({ reactSad: false }) }} onTouchStart={() => { this.setState({ reactSad: true }) }} onTouchMove={() => { this.setState({ reactSad: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike() }}>
+              <span onMouseOver={() => { this.setState({ reactSad: true }) }} onMouseOut={() => { this.setState({ reactSad: false }) }} onTouchStart={() => { this.setState({ reactSad: true }) }} onTouchMove={() => { this.setState({ reactSad: false }) }} onClick={() => { this.handlerShowReactions(false); this.handleLike(); this.setState({ reactSad: false }) }}>
                 <FacebookEmoji size={reactSad ? 'md' : 'sm'} type="sad" />
               </span>
             </div>
