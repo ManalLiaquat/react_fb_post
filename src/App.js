@@ -32,7 +32,7 @@ class App extends Component {
         <SimpleAppBar />
         {/* <FacebookImage images={post_obj.images} width={30} /> */}
         {/* <hr /> */}
-        <Grid container style={paperStyle} direction="row" justify="space-evenly" alignItems="center">
+        <Grid container style={paperStyle} direction="row" justify="center" alignItems="center">
           <div style={paperStyle}>
             <FBPost post={post_obj} />
           </div>
