@@ -7,19 +7,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-*{  
-  font-size: 14px !important
+* {
+  font-size: 14px !important;
 }
 
-* h2{
+* h2 {
   font-size: 1.3125rem !important;
   font-weight: 500 !important;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
   line-height: 1.16667em !important;
 }
 
-* svg{
-  font-size: 2rem !important
+* svg {
+  font-size: 2rem !important;
 }
 
 code {
@@ -27,7 +27,6 @@ code {
     monospace;
 }
 
-#fbImage > div{
-  position: relative; 
+#fbImage > div {
+  position: relative;
 }
-
