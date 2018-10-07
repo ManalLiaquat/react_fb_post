@@ -50,8 +50,6 @@ class App extends Component {
     return (
       <div>
         <SimpleAppBar />
-        {/* <FacebookImage images={post_obj.images} width={30} /> */}
-        {/* <hr /> */}
         <Grid
           container
           style={paperStyle}
@@ -63,7 +61,6 @@ class App extends Component {
             <FBPost post={post_obj} />
           </div>
         </Grid>
-        {/* <Button variant="contained" color="primary" >Click</Button> */}
       </div>
     );
   }

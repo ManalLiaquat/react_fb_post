@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Avatar from "@material-ui/core/Avatar";
@@ -19,7 +18,7 @@ import moment from "moment";
 
 const styles = theme => ({
   card: {
-    maxWidth: 600,
+    maxWidth: 550,
     margin: "5px",
     padding: "0px"
   },
@@ -35,6 +34,7 @@ class FBPost extends React.Component {
       showReactions: false,
       likeBtnFlag: false,
       likes: props.post.likes,
+      whNUM: 0,
       // reactions on hover like button
       reactLike: false,
       reactLove: false,
@@ -46,6 +46,7 @@ class FBPost extends React.Component {
     };
     this.handlerShowReactions = this.handlerShowReactions.bind(this);
     this.handleLike = this.handleLike.bind(this);
+    this.onresize = this.onresize.bind(this);
   }
 
   handleLike() {
@@ -57,8 +58,23 @@ class FBPost extends React.Component {
   }
 
   handlerShowReactions(param) {
-    // const { showReactions } = this.state
     this.setState({ showReactions: param });
+  }
+
+  onresize() {
+    let width = window.outerWidth;
+
+    if (width <= 530) {
+      this.setState({ whNUM: 100 });
+    } else if (width >= 1600 || (width >= 1024 && width <= 1440)) {
+      this.setState({ whNUM: 34 });
+    } else if (width > 530 && width < 1024) {
+      this.setState({ whNUM: 70 });
+    }
+  }
+
+  componentDidMount() {
+    this.onresize();
   }
 
   render() {
@@ -73,9 +89,10 @@ class FBPost extends React.Component {
       reactYay,
       reactAngry,
       reactHaha,
-      reactSad
+      reactSad,
+      whNUM
     } = this.state;
-    // console.log("post****", post);
+    window.addEventListener("resize", this.onresize);
 
     return (
       <div>
@@ -97,16 +114,11 @@ class FBPost extends React.Component {
           <CardContent>
             <Typography component="p">{post.description}</Typography>
           </CardContent>
-          <div id="fbImage">
-            <FacebookImage
-              images={post.images}
-              countFrom={5}
-              width={100}
-              align="left"
-            />
+          <div style={{ height: `${whNUM - 6}vw` }}>
+            <FacebookImage images={post.images} width={whNUM} align="left" />
           </div>
           <hr />
-          <p style={{ fontSize: "10px", marginLeft: "2px" }}>
+          <p style={{ fontSize: "10px", marginLeft: "5px" }}>
             {likes[0]}, {likes[1]} and {likes.length - 2} others
           </p>
           {showReactions && (
