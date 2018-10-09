@@ -18,7 +18,7 @@ import moment from "moment";
 
 const styles = theme => ({
   card: {
-    maxWidth: 550,
+    maxWidth: 450,
     margin: "5px",
     padding: "0px"
   },
@@ -34,7 +34,7 @@ class FBPost extends React.Component {
       showReactions: false,
       likeBtnFlag: false,
       likes: props.post.likes,
-      whNUM: 0,
+      // whNUM: 0,
       // reactions on hover like button
       reactLike: false,
       reactLove: false,
@@ -46,7 +46,7 @@ class FBPost extends React.Component {
     };
     this.handlerShowReactions = this.handlerShowReactions.bind(this);
     this.handleLike = this.handleLike.bind(this);
-    this.onresize = this.onresize.bind(this);
+    // this.onresize = this.onresize.bind(this);
   }
 
   handleLike() {
@@ -61,21 +61,21 @@ class FBPost extends React.Component {
     this.setState({ showReactions: param });
   }
 
-  onresize() {
-    let width = window.outerWidth;
+  // onresize() {
+  //   let width = window.outerWidth;
 
-    if (width <= 530) {
-      this.setState({ whNUM: 100 });
-    } else if (width >= 1600 || (width >= 1024 && width <= 1440)) {
-      this.setState({ whNUM: 34 });
-    } else if (width > 530 && width < 1024) {
-      this.setState({ whNUM: 70 });
-    }
-  }
+  //   if (width <= 530) {
+  //     this.setState({ whNUM: 100 });
+  //   } else if (width >= 1600 || (width >= 1024 && width <= 1440)) {
+  //     this.setState({ whNUM: 34 });
+  //   } else if (width > 530 && width < 1024) {
+  //     this.setState({ whNUM: 70 });
+  //   }
+  // }
 
-  componentDidMount() {
-    this.onresize();
-  }
+  // componentDidMount() {
+  //    this.onresize();
+  // }
 
   render() {
     const { classes, post } = this.props;
@@ -89,10 +89,10 @@ class FBPost extends React.Component {
       reactYay,
       reactAngry,
       reactHaha,
-      reactSad,
-      whNUM
+      reactSad
+      // whNUM
     } = this.state;
-    window.addEventListener("resize", this.onresize);
+    // window.addEventListener("resize", this.onresize);
 
     return (
       <div>
@@ -114,8 +114,8 @@ class FBPost extends React.Component {
           <CardContent>
             <Typography component="p">{post.description}</Typography>
           </CardContent>
-          <div style={{ height: `${whNUM - 6}vw` }}>
-            <FacebookImage images={post.images} width={whNUM} align="left" />
+          <div>
+            <FacebookImage images={post.images} />
           </div>
           <hr />
           <p style={{ fontSize: "10px", marginLeft: "5px" }}>
@@ -125,7 +125,7 @@ class FBPost extends React.Component {
             <div
               style={{
                 bottom: "7%",
-                position: "fixed",
+                position: "absolute",
                 padding: "5px 10px",
                 borderRadius: "50px",
                 background: "#fafafa",
