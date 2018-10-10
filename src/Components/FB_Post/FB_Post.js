@@ -1,14 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Avatar,
+  IconButton,
+  Typography,
+  Tooltip
+} from "@material-ui/core";
+import ThumbIcon from "@material-ui/icons/ThumbUpAlt";
+import CommentIcon from "@material-ui/icons/Comment";
 import ShareIcon from "@material-ui/icons/Share";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 // other libs
@@ -115,7 +119,7 @@ class FBPost extends React.Component {
             <Typography component="p">{post.description}</Typography>
           </CardContent>
           <div>
-            <FacebookImage images={post.images} />
+            <FacebookImage images={post.images} hideOverlay="true"  />
           </div>
           <hr />
           <p style={{ fontSize: "10px", marginLeft: "5px" }}>
@@ -285,25 +289,34 @@ class FBPost extends React.Component {
             </div>
           )}
           <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton
-              aria-label="Like"
-              onClick={this.handleLike}
-              onMouseEnter={() => {
-                this.handlerShowReactions(true);
-              }}
-              onTouchStart={() => {
-                this.handlerShowReactions(true);
-              }}
-              onBlurCapture={() => {
-                this.handlerShowReactions(false);
-              }}
-              color={likeBtnFlag ? "primary" : "default"}
-            >
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="Share">
-              <ShareIcon />
-            </IconButton>
+            <Tooltip title="Like" placement="right">
+              <IconButton
+                aria-label="Like"
+                onClick={this.handleLike}
+                onMouseEnter={() => {
+                  this.handlerShowReactions(true);
+                }}
+                onTouchStart={() => {
+                  this.handlerShowReactions(true);
+                }}
+                onBlurCapture={() => {
+                  this.handlerShowReactions(false);
+                }}
+                color={likeBtnFlag ? "primary" : "default"}
+              >
+                <ThumbIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Comment" placement="right">
+              <IconButton>
+                <CommentIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Share" placement="right">
+              <IconButton aria-label="Share">
+                <ShareIcon />
+              </IconButton>
+            </Tooltip>
           </CardActions>
         </Card>
       </div>
