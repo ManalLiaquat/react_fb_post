@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import SimpleAppBar from "./Components/Navbar/Navbar";
 import FBPost from "./Components/FB_Post/FB_Post";
-import FacebookImage from "react-fb-image-grid";
-
 // material ui
-import { Button, Typography, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 // import NavigateNext from "@material-ui/icons/NavigateNext";
 // material ui
 
